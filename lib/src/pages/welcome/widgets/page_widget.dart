@@ -13,6 +13,7 @@ class PageWidget extends StatelessWidget {
     required this.title,
     required this.subTitle,
     required this.imagePath,
+    required this.func,
   });
 
   final int index;
@@ -20,6 +21,7 @@ class PageWidget extends StatelessWidget {
   final String title;
   final String subTitle;
   final String imagePath;
+  final void Function(int index) func;
 
   @override
   Widget build(BuildContext context) {
@@ -62,12 +64,12 @@ class PageWidget extends StatelessWidget {
                     children: [
                       CustomButtonWidget(
                         text: buttonName,
+                        func: () => func(index),
                       ),
                       Container(
                         padding: const EdgeInsets.only(top: 32),
                         child: BlocBuilder<WelcomeBloc, WelcomeState>(
                           builder: (BuildContext context, WelcomeState state) {
-                            debugPrint('posicao: ${state.page}');
                             return DotsIndicator(
                               dotsCount: 3,
                               position: state.page,

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 class CustomButtonWidget extends StatelessWidget {
-  const CustomButtonWidget({super.key, required this.text});
+  const CustomButtonWidget({
+    super.key,
+    required this.text,
+    required this.func,
+  });
 
   final String text;
+  final Function func;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +16,7 @@ class CustomButtonWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: 50,
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: () => func(),
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.blue,
           shape: const RoundedRectangleBorder(

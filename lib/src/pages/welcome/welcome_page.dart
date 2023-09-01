@@ -2,6 +2,7 @@ import 'package:bloc_pattern/src/pages/welcome/blocs/welcome_bloc.dart';
 import 'package:bloc_pattern/src/pages/welcome/blocs/welcome_events.dart';
 import 'package:bloc_pattern/src/pages/welcome/blocs/welcome_states.dart';
 import 'package:bloc_pattern/src/pages/welcome/widgets/page_widget.dart';
+import 'package:bloc_pattern/src/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -15,6 +16,21 @@ class WelcomePage extends StatefulWidget {
 class _LandingPageState extends State<WelcomePage> {
   final _controller = PageController();
 
+  void _changePage(index) {
+    debugPrint('index: $index');
+    if (index < 2) {
+      _controller.nextPage(
+        duration: const Duration(milliseconds: 500),
+        curve: Curves.easeIn,
+      );
+    } else {
+      Navigator.of(context).pushNamedAndRemoveUntil(
+        Routes.signIn,
+        (route) => false,
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,10 +41,9 @@ class _LandingPageState extends State<WelcomePage> {
             return PageView(
               controller: _controller,
               onPageChanged: (index) {
-                debugPrint('index: $index');
                 return bloc.add(WelcomeEvent(page: index));
               },
-              children: const [
+              children: [
                 PageWidget(
                   index: 0,
                   buttonName: 'next',
@@ -36,6 +51,7 @@ class _LandingPageState extends State<WelcomePage> {
                   subTitle:
                       'Forget about a for paper knowledge in one learning',
                   imagePath: 'assets/images/reading.png',
+                  func: _changePage,
                 ),
                 PageWidget(
                   index: 1,
@@ -44,6 +60,7 @@ class _LandingPageState extends State<WelcomePage> {
                   subTitle:
                       "Always keep in touch with your tutor & friend. Let's get connected",
                   imagePath: 'assets/images/boy.png',
+                  func: _changePage,
                 ),
                 PageWidget(
                   index: 2,
@@ -52,6 +69,7 @@ class _LandingPageState extends State<WelcomePage> {
                   subTitle:
                       'Anywhere, anytime. The time is at our discrition, so study whenever you want',
                   imagePath: 'assets/images/man.png',
+                  func: _changePage,
                 ),
               ],
             );
