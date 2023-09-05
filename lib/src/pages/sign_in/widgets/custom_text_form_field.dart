@@ -12,6 +12,7 @@ class CustomTextFormField extends StatefulWidget {
     required this.validator,
     this.obscureText = false,
     this.onChange,
+    this.controller,
   });
 
   final String labelText;
@@ -21,6 +22,7 @@ class CustomTextFormField extends StatefulWidget {
   final bool obscureText;
   final String? Function(String?) validator;
   final Function? onChange;
+  final TextEditingController? controller;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -50,6 +52,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           ),
           TextFormField(
             key: _textFormFieldKey,
+            controller: widget.controller,
             autocorrect: false,
             keyboardType: widget.textType,
             obscureText: _obscureText,

@@ -15,6 +15,8 @@ class SignInPage extends StatefulWidget {
 
 class _SignInPageState extends State<SignInPage> with ValidationMixins {
   final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   AutovalidateMode _autoValidate = AutovalidateMode.disabled;
 
@@ -47,6 +49,7 @@ class _SignInPageState extends State<SignInPage> with ValidationMixins {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CustomTextFormField(
+                      controller: _emailController,
                       labelText: 'Email',
                       textType: TextInputType.emailAddress,
                       hintText: 'Enter your email address',
@@ -55,6 +58,7 @@ class _SignInPageState extends State<SignInPage> with ValidationMixins {
                       validator: (email) => emailValidation(email: email),
                     ),
                     CustomTextFormField(
+                      controller: _passwordController,
                       labelText: 'Password',
                       textType: TextInputType.visiblePassword,
                       hintText: 'Enter your password',
