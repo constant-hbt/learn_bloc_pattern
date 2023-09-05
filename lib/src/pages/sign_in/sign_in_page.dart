@@ -1,5 +1,9 @@
+import 'package:bloc_pattern/src/pages/sign_in/widgets/custom_elevated_button_widget.dart';
+import 'package:bloc_pattern/src/pages/sign_in/widgets/custom_outline_button_widget.dart';
+import 'package:bloc_pattern/src/pages/sign_in/widgets/custom_text_form_field.dart';
 import 'package:bloc_pattern/src/pages/sign_in/widgets/custom_widgets.dart';
 import 'package:bloc_pattern/src/pages/sign_in/widgets/third_party_login_widget.dart';
+import 'package:bloc_pattern/src/shared/utils/validation_mixins.dart';
 import 'package:flutter/material.dart';
 
 class SignInPage extends StatefulWidget {
@@ -9,54 +13,83 @@ class SignInPage extends StatefulWidget {
   State<SignInPage> createState() => _SignInPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _SignInPageState extends State<SignInPage> with ValidationMixins {
   final _formKey = GlobalKey<FormState>();
+
+  AutovalidateMode _autoValidate = AutovalidateMode.disabled;
+
+  void _setAutoValidateMode() {
+    setState(() {
+      _autoValidate = AutovalidateMode.always;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CustomWidgets.buildAppBar('Log In'),
       body: SafeArea(
-          child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const ThirdPartyLoginWidget(),
-          Center(
-              child:
-                  CustomWidgets.reusableText('Or use your account to login')),
-          Container(
-            margin: const EdgeInsets.only(top: 60),
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Form(
+          child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const ThirdPartyLoginWidget(),
+            Center(
+                child:
+                    CustomWidgets.reusableText('Or use your account to login')),
+            Container(
+              margin: const EdgeInsets.only(top: 60),
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Form(
                 key: _formKey,
+                autovalidateMode: _autoValidate,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    TextFormField(
-                      autocorrect: false,
-                      decoration: const InputDecoration(
-                        label: Text('Email'),
-                        labelStyle: TextStyle(color: Colors.black),
-                        border: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                          ),
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    )
+                    CustomTextFormField(
+                      labelText: 'Email',
+                      textType: TextInputType.emailAddress,
+                      hintText: 'Enter your email address',
+                      icon: Icons.email_outlined,
+                      onChange: _setAutoValidateMode,
+                      validator: (email) => emailValidation(email: email),
+                    ),
+                    CustomTextFormField(
+                      labelText: 'Password',
+                      textType: TextInputType.visiblePassword,
+                      hintText: 'Enter your password',
+                      icon: Icons.password,
+                      obscureText: true,
+                      onChange: _setAutoValidateMode,
+                      validator: (password) =>
+                          passwordValidation(password: password),
+                    ),
+                    CustomWidgets.forgotPassword(context, () {}),
+                    const SizedBox(
+                      height: 80,
+                    ),
+                    CustomElevatedButtonWidget(
+                        text: 'Log In',
+                        func: () {
+                          if (_formKey.currentState != null &&
+                              _formKey.currentState!.validate()) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Funcionou')));
+                          }
+                        }),
+                    const SizedBox(
+                      height: 32,
+                    ),
+                    CustomOutlineButtonWidget(text: 'Sign Up', func: () {}),
+                    const SizedBox(
+                      height: 32,
+                    ),
                   ],
-                )),
-          )
-        ],
+                ),
+              ),
+            )
+          ],
+        ),
       )),
     );
   }

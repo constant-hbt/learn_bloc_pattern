@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomButtonWidget extends StatelessWidget {
-  const CustomButtonWidget({
+class CustomElevatedButtonWidget extends StatelessWidget {
+  const CustomElevatedButtonWidget({
     super.key,
     required this.text,
     required this.func,
@@ -16,15 +16,14 @@ class CustomButtonWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: 50,
       child: ElevatedButton(
-        onPressed: () => func(),
         child: Text(
           text,
           style: const TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.normal,
             fontSize: 16,
+            fontWeight: FontWeight.normal,
           ),
         ),
+        onPressed: () => func(),
       ),
     );
   }

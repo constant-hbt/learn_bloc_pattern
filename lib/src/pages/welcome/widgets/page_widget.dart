@@ -75,7 +75,8 @@ class PageWidget extends StatelessWidget {
                               position: state.page,
                               mainAxisAlignment: MainAxisAlignment.center,
                               decorator: DotsDecorator(
-                                  activeColor: Colors.blue,
+                                  activeColor:
+                                      Theme.of(context).colorScheme.primary,
                                   activeSize: const Size(16.0, 9.0),
                                   activeShape: RoundedRectangleBorder(
                                       borderRadius:
