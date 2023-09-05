@@ -1,3 +1,4 @@
+import 'package:bloc_pattern/src/pages/sign_in/sign_in_controller.dart';
 import 'package:bloc_pattern/src/pages/sign_in/widgets/custom_elevated_button_widget.dart';
 import 'package:bloc_pattern/src/pages/sign_in/widgets/custom_outline_button_widget.dart';
 import 'package:bloc_pattern/src/pages/sign_in/widgets/custom_text_form_field.dart';
@@ -17,6 +18,7 @@ class _SignInPageState extends State<SignInPage> with ValidationMixins {
   final _formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final SignInController _signInController = SignInController();
 
   AutovalidateMode _autoValidate = AutovalidateMode.disabled;
 
@@ -24,6 +26,13 @@ class _SignInPageState extends State<SignInPage> with ValidationMixins {
     setState(() {
       _autoValidate = AutovalidateMode.always;
     });
+  }
+
+  void _signIn() {
+    if (_formKey.currentState != null && _formKey.currentState!.validate()) {
+      _signInController.handleSignIn(
+          _emailController.text, _passwordController.text);
+    }
   }
 
   @override
@@ -72,15 +81,7 @@ class _SignInPageState extends State<SignInPage> with ValidationMixins {
                     const SizedBox(
                       height: 80,
                     ),
-                    CustomElevatedButtonWidget(
-                        text: 'Log In',
-                        func: () {
-                          if (_formKey.currentState != null &&
-                              _formKey.currentState!.validate()) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Funcionou')));
-                          }
-                        }),
+                    CustomElevatedButtonWidget(text: 'Log In', func: _signIn),
                     const SizedBox(
                       height: 32,
                     ),
