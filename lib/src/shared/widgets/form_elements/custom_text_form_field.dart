@@ -1,15 +1,15 @@
-import 'package:bloc_pattern/src/pages/sign_in/widgets/custom_widgets.dart';
 import 'package:bloc_pattern/src/shared/themes/app_color_scheme.dart';
+import 'package:bloc_pattern/src/shared/widgets/build_functions.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
     super.key,
     required this.textType,
-    required this.hintText,
     required this.icon,
     required this.labelText,
     required this.validator,
+    this.hintText,
     this.obscureText = false,
     this.onChange,
     this.controller,
@@ -17,7 +17,7 @@ class CustomTextFormField extends StatefulWidget {
 
   final String labelText;
   final TextInputType textType;
-  final String hintText;
+  final String? hintText;
   final IconData icon;
   final bool obscureText;
   final String? Function(String?) validator;
@@ -46,7 +46,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomWidgets.reusableText(widget.labelText),
+          BuildFunctions.reusableText(widget.labelText),
           const SizedBox(
             height: 5,
           ),
@@ -68,7 +68,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               color: AppColorScheme.primaryText,
               fontFamily: "Avenir",
               fontWeight: FontWeight.normal,
-              fontSize: 16,
+              fontSize: 14,
             ),
             decoration: InputDecoration(
               prefixIcon: Icon(widget.icon),

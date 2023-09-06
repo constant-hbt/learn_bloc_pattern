@@ -1,38 +1,46 @@
+import 'package:bloc_pattern/src/shared/widgets/notifications/flutter_toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 
 class SignInController {
-  void handleSignIn(String email, String password) async {
+  Future<bool> handleSignIn(String email, String password) async {
     try {
       final credential = await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-      if (credential.user == null) {
-        debugPrint('Usuário não encontrado');
-      }
-
-      if (!credential.user!.emailVerified) {
-        debugPrint('Email não verificado');
-      }
-
       User? user = credential.user;
-      if (user != null) {
-        debugPrint('Usuário credenciado');
-      } else {
-        debugPrint('Usuário não existe');
-      }
-    } on FirebaseAuthException catch (e) {
-      debugPrint('Erro Firebase: ${e.message}');
 
+      if (user == null) {
+        FlutterToast.toastInfo(
+            msg: 'Usuário não encontrado. Verifique seu e-mail/senha');
+        return false;
+      }
+
+      if (!user.emailVerified) {
+        FlutterToast.toastInfo(
+            msg: 'E-mail não verificado. Verifique-o e tente novamente');
+        return false;
+      }
+
+      FlutterToast.toastInfo(msg: 'Usuário cadastrado!');
+      return true;
+    } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
-        debugPrint('user-not-found');
+        FlutterToast.toastInfo(
+            msg: 'Usuário não encontrado para essa conta de e-mail');
       } else if (e.code == 'wrong-password') {
-        debugPrint('wrong-password');
+        FlutterToast.toastInfo(
+            msg: 'Informações inválidas. Verifique seu e-mail/senha');
       } else if (e.code == 'invalid-email') {
-        debugPrint('invalid-email');
+        FlutterToast.toastInfo(msg: 'Seu formato de e-mail é inválido');
+      } else {
+        FlutterToast.toastInfo(
+            msg: 'Não foi possível realizar o login. Tente novamente');
       }
     } catch (e) {
       debugPrint('Erro genérico: ${e.toString()}');
     }
+
+    return false;
   }
 }

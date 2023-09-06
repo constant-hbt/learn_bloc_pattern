@@ -1,4 +1,4 @@
-import 'package:bloc_pattern/src/pages/welcome/blocs/welcome_bloc.dart';
+import 'package:bloc_pattern/src/pages/bloc_providers.dart';
 import 'package:bloc_pattern/src/pages/welcome/welcome_page.dart';
 import 'package:bloc_pattern/src/routes.dart';
 import 'package:bloc_pattern/src/shared/themes/app_theme.dart';
@@ -16,11 +16,7 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (context) => WelcomeBloc(),
-        ),
-      ],
+      providers: AppBlocProviders.blocProviders,
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,

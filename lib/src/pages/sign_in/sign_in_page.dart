@@ -1,10 +1,9 @@
 import 'package:bloc_pattern/src/pages/sign_in/sign_in_controller.dart';
-import 'package:bloc_pattern/src/pages/sign_in/widgets/custom_elevated_button_widget.dart';
-import 'package:bloc_pattern/src/pages/sign_in/widgets/custom_outline_button_widget.dart';
-import 'package:bloc_pattern/src/pages/sign_in/widgets/custom_text_form_field.dart';
 import 'package:bloc_pattern/src/pages/sign_in/widgets/custom_widgets.dart';
 import 'package:bloc_pattern/src/pages/sign_in/widgets/third_party_login_widget.dart';
+import 'package:bloc_pattern/src/routes.dart';
 import 'package:bloc_pattern/src/shared/utils/validation_mixins.dart';
+import 'package:bloc_pattern/src/shared/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 
 class SignInPage extends StatefulWidget {
@@ -28,9 +27,9 @@ class _SignInPageState extends State<SignInPage> with ValidationMixins {
     });
   }
 
-  void _signIn() {
+  Future<void> _signIn() async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
-      _signInController.handleSignIn(
+      await _signInController.handleSignIn(
           _emailController.text, _passwordController.text);
     }
   }
@@ -38,7 +37,7 @@ class _SignInPageState extends State<SignInPage> with ValidationMixins {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomWidgets.buildAppBar('Log In'),
+      appBar: BuildFunctions.buildAppBar('Log In'),
       body: SafeArea(
           child: SingleChildScrollView(
         child: Column(
@@ -46,8 +45,8 @@ class _SignInPageState extends State<SignInPage> with ValidationMixins {
           children: [
             const ThirdPartyLoginWidget(),
             Center(
-                child:
-                    CustomWidgets.reusableText('Or use your account to login')),
+                child: BuildFunctions.reusableText(
+                    'Or use your account to login')),
             Container(
               margin: const EdgeInsets.only(top: 60),
               padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -85,7 +84,10 @@ class _SignInPageState extends State<SignInPage> with ValidationMixins {
                     const SizedBox(
                       height: 32,
                     ),
-                    CustomOutlineButtonWidget(text: 'Sign Up', func: () {}),
+                    CustomOutlineButtonWidget(
+                        text: 'Sign Up',
+                        func: () =>
+                            Navigator.of(context).pushNamed(Routes.register)),
                     const SizedBox(
                       height: 32,
                     ),

@@ -16,7 +16,7 @@ class CustomOutlineButtonWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width,
       height: 50,
       child: OutlinedButton(
-        onPressed: () => func,
+        onPressed: () => func(),
         child: Text(text),
       ),
     );

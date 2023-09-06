@@ -2,7 +2,7 @@ import 'package:bloc_pattern/src/shared/themes/app_color_scheme.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
-  static get lightTheme => ThemeData.light().copyWith(
+  static ThemeData get lightTheme => ThemeData.light().copyWith(
       colorScheme: AppColorScheme.lightColorScheme,
       appBarTheme: AppBarTheme(
         color: AppColorScheme.lightColorScheme.background,
@@ -13,6 +13,9 @@ class AppTheme {
         ),
         centerTitle: true,
         elevation: 0,
+        iconTheme: const IconThemeData(
+          color: AppColorScheme.primaryText,
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
