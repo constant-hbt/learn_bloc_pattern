@@ -1,10 +1,10 @@
 import 'package:bloc_pattern/src/pages/sign_in/sign_in_controller.dart';
 import 'package:bloc_pattern/src/pages/sign_in/widgets/custom_widgets.dart';
 import 'package:bloc_pattern/src/pages/sign_in/widgets/third_party_login_widget.dart';
-import 'package:bloc_pattern/src/routes.dart';
 import 'package:bloc_pattern/src/shared/utils/validation_mixins.dart';
 import 'package:bloc_pattern/src/shared/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:bloc_pattern/src/shared/routes/routes.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -29,8 +29,12 @@ class _SignInPageState extends State<SignInPage> with ValidationMixins {
 
   Future<void> _signIn() async {
     if (_formKey.currentState != null && _formKey.currentState!.validate()) {
-      await _signInController.handleSignIn(
-          _emailController.text, _passwordController.text);
+      if (await _signInController.handleSignIn(
+              _emailController.text, _passwordController.text) &&
+          context.mounted) {
+        Navigator.of(context).pushNamedAndRemoveUntil(
+            AppRouteNames.APPLICATION, (route) => false);
+      }
     }
   }
 
@@ -86,8 +90,8 @@ class _SignInPageState extends State<SignInPage> with ValidationMixins {
                     ),
                     CustomOutlineButtonWidget(
                         text: 'Sign Up',
-                        func: () =>
-                            Navigator.of(context).pushNamed(Routes.register)),
+                        func: () => Navigator.of(context)
+                            .pushNamed(AppRouteNames.REGISTER)),
                     const SizedBox(
                       height: 32,
                     ),

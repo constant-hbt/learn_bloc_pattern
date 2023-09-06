@@ -22,7 +22,7 @@ class SignInController {
         return false;
       }
 
-      FlutterToast.toastInfo(msg: 'Usuário cadastrado!');
+      FlutterToast.toastInfo(msg: 'Bem-vindo, ${user.displayName}');
       return true;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {

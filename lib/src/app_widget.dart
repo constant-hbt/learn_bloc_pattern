@@ -1,6 +1,4 @@
-import 'package:bloc_pattern/src/pages/bloc_providers.dart';
-import 'package:bloc_pattern/src/pages/welcome/welcome_page.dart';
-import 'package:bloc_pattern/src/routes.dart';
+import 'package:bloc_pattern/src/shared/routes/routes.dart';
 import 'package:bloc_pattern/src/shared/themes/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,13 +14,12 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: AppBlocProviders.blocProviders,
+      providers: [...AppRoutePages.allBlocProviders()],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
-        home: const WelcomePage(),
-        initialRoute: "/welcome",
-        routes: Routes.routes(context),
+        initialRoute: AppRouteNames.WELCOME,
+        onGenerateRoute: AppRoutePages.generateRouteSettings,
       ),
     );
   }

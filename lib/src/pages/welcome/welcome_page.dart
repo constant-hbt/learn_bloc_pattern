@@ -2,9 +2,9 @@ import 'package:bloc_pattern/src/pages/welcome/blocs/welcome_bloc.dart';
 import 'package:bloc_pattern/src/pages/welcome/blocs/welcome_events.dart';
 import 'package:bloc_pattern/src/pages/welcome/blocs/welcome_states.dart';
 import 'package:bloc_pattern/src/pages/welcome/widgets/page_widget.dart';
-import 'package:bloc_pattern/src/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:bloc_pattern/src/shared/routes/routes.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({super.key});
@@ -17,7 +17,6 @@ class _LandingPageState extends State<WelcomePage> {
   final _controller = PageController();
 
   void _changePage(index) {
-    debugPrint('index: $index');
     if (index < 2) {
       _controller.nextPage(
         duration: const Duration(milliseconds: 500),
@@ -25,7 +24,7 @@ class _LandingPageState extends State<WelcomePage> {
       );
     } else {
       Navigator.of(context).pushNamedAndRemoveUntil(
-        Routes.signIn,
+        AppRouteNames.SIGN_IN,
         (route) => false,
       );
     }
