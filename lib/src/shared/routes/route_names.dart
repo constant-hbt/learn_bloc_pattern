@@ -4,5 +4,5 @@ class AppRouteNames {
   static const WELCOME = '/welcome';
   static const SIGN_IN = '/sign-in';
   static const REGISTER = '/register';
-  static const APPLICATION = '/home';
+  static const APPLICATION = '/application';
 }

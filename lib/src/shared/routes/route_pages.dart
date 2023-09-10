@@ -1,3 +1,5 @@
+import 'package:bloc_pattern/src/global.dart';
+import 'package:bloc_pattern/src/pages/application/bloc/application_bloc.dart';
 import 'package:bloc_pattern/src/pages/welcome/blocs/welcome_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc_pattern/src/pages/pages.dart';
@@ -7,7 +9,7 @@ import 'package:bloc_pattern/src/shared/routes/routes.dart';
 class PageEntity {
   String route;
   Widget page;
-  dynamic bloc;
+  List<dynamic>? bloc;
 
   PageEntity(
     this.route,
@@ -21,7 +23,9 @@ class AppRoutePages {
         PageEntity(
           AppRouteNames.WELCOME,
           const WelcomePage(),
-          bloc: BlocProvider(create: (context) => WelcomeBloc()),
+          bloc: [
+            BlocProvider(create: (context) => WelcomeBloc()),
+          ],
         ),
         PageEntity(
           AppRouteNames.SIGN_IN,
@@ -34,6 +38,9 @@ class AppRoutePages {
         PageEntity(
           AppRouteNames.APPLICATION,
           const ApplicationPage(),
+          bloc: [
+            BlocProvider(create: (context) => ApplicationBloc()),
+          ],
         ),
       ];
 
@@ -41,12 +48,8 @@ class AppRoutePages {
   static List<dynamic> allBlocProviders() {
     List<dynamic> blocProviders = [];
     for (var pageEntity in getRoutePages()) {
-      if (pageEntity.bloc != null) {
-        if (pageEntity.bloc is List<dynamic>) {
-          blocProviders.addAll(pageEntity.bloc as List<dynamic>);
-        } else {
-          blocProviders.add(pageEntity.bloc);
-        }
+      if (pageEntity.bloc != null && pageEntity.bloc!.isNotEmpty) {
+        blocProviders.addAll(pageEntity.bloc as List<dynamic>);
       }
     }
 
@@ -65,5 +68,18 @@ class AppRoutePages {
 
     return MaterialPageRoute(
         builder: (context) => const SignInPage(), settings: settings);
+  }
+
+  static List<MaterialPageRoute> generateInitialRoute(String settings) {
+    if (Global.storageService.getDeviceFirstOpen()) {
+      if (Global.storageService.getIsLoggedIn()) {
+        return [
+          MaterialPageRoute(builder: (context) => const ApplicationPage())
+        ];
+      }
+      return [MaterialPageRoute(builder: (context) => const SignInPage())];
+    }
+
+    return [MaterialPageRoute(builder: (context) => const WelcomePage())];
   }
 }

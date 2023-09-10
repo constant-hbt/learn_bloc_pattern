@@ -1,3 +1,5 @@
+import 'package:bloc_pattern/src/global.dart';
+import 'package:bloc_pattern/src/shared/values/app_constants.dart';
 import 'package:bloc_pattern/src/shared/widgets/notifications/flutter_toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -21,7 +23,8 @@ class SignInController {
             msg: 'E-mail não verificado. Verifique-o e tente novamente');
         return false;
       }
-
+      Global.storageService
+          .setString(AppConstants.STORAGE_USER_TOKEN_KEY, '12345678');
       FlutterToast.toastInfo(msg: 'Bem-vindo, ${user.displayName}');
       return true;
     } on FirebaseAuthException catch (e) {

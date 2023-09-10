@@ -18,7 +18,7 @@ class _AppState extends State<App> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: AppTheme.lightTheme,
-        initialRoute: AppRouteNames.APPLICATION,
+        onGenerateInitialRoutes: AppRoutePages.generateInitialRoute,
         onGenerateRoute: AppRoutePages.generateRouteSettings,
       ),
     );

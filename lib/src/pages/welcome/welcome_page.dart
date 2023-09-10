@@ -1,7 +1,9 @@
+import 'package:bloc_pattern/src/global.dart';
 import 'package:bloc_pattern/src/pages/welcome/blocs/welcome_bloc.dart';
 import 'package:bloc_pattern/src/pages/welcome/blocs/welcome_events.dart';
 import 'package:bloc_pattern/src/pages/welcome/blocs/welcome_states.dart';
 import 'package:bloc_pattern/src/pages/welcome/widgets/page_widget.dart';
+import 'package:bloc_pattern/src/shared/values/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc_pattern/src/shared/routes/routes.dart';
@@ -23,6 +25,8 @@ class _LandingPageState extends State<WelcomePage> {
         curve: Curves.easeIn,
       );
     } else {
+      Global.storageService
+          .setBool(AppConstants.STORAGE_DEVICE_OPEN_FIRST_TIME, true);
       Navigator.of(context).pushNamedAndRemoveUntil(
         AppRouteNames.SIGN_IN,
         (route) => false,
