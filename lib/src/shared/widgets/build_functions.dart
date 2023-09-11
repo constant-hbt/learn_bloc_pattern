@@ -18,9 +18,10 @@ class BuildFunctions {
     );
   }
 
-  static Widget reusableText(String text) => Container(
-        margin: const EdgeInsets.only(
-          bottom: 5,
+  static Widget reusableText(String text, {double marginBottom = 5}) =>
+      Container(
+        margin: EdgeInsets.only(
+          bottom: marginBottom,
         ),
         child: Text(
           text,

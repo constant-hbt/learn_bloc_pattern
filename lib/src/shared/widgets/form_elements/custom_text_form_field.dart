@@ -6,23 +6,25 @@ class CustomTextFormField extends StatefulWidget {
   const CustomTextFormField({
     super.key,
     required this.textType,
-    required this.icon,
-    required this.labelText,
-    required this.validator,
+    this.icon,
+    this.labelText,
+    this.validator,
     this.hintText,
     this.obscureText = false,
     this.onChange,
     this.controller,
+    this.contentPadding,
   });
 
-  final String labelText;
+  final String? labelText;
   final TextInputType textType;
   final String? hintText;
-  final IconData icon;
+  final IconData? icon;
   final bool obscureText;
-  final String? Function(String?) validator;
+  final String? Function(String?)? validator;
   final Function? onChange;
   final TextEditingController? controller;
+  final EdgeInsets? contentPadding;
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -46,10 +48,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          BuildFunctions.reusableText(widget.labelText),
-          const SizedBox(
-            height: 5,
-          ),
+          if (widget.labelText != null && widget.labelText!.isNotEmpty)
+            BuildFunctions.reusableText(widget.labelText!, marginBottom: 10),
           TextFormField(
             key: _textFormFieldKey,
             controller: widget.controller,
@@ -71,7 +71,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               fontSize: 14,
             ),
             decoration: InputDecoration(
-              prefixIcon: Icon(widget.icon),
+              contentPadding: widget.contentPadding,
+              prefixIcon: widget.icon != null ? Icon(widget.icon) : null,
               suffixIcon: widget.obscureText
                   ? IconButton(
                       icon: Icon(_obscureText
