@@ -1,4 +1,4 @@
-import 'package:bloc_pattern/src/pages/home/home_page.dart';
+import 'package:bloc_pattern/src/pages/pages.dart';
 import 'package:flutter/material.dart';
 
 class ApplicationWidgets {
@@ -8,7 +8,7 @@ class ApplicationWidgets {
       const Center(child: Text("Search")),
       const Center(child: Text("Course")),
       const Center(child: Text("Chat")),
-      const Center(child: Text("Profile")),
+      const ProfilePage(),
     ];
 
     return pages[index];

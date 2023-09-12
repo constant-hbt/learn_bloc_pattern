@@ -50,6 +50,10 @@ class AppRoutePages {
             BlocProvider(create: (context) => HomeBlocs()),
           ],
         ),
+        PageEntity(
+          AppRouteNames.SETTINGS,
+          const SettingsPage(),
+        ),
       ];
 
   //Retorna todos os Bloc Providers

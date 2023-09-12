@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: HomeWidgets.buildAppBar(),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
         child: CustomScrollView(
           slivers: [
             const SliverToBoxAdapter(
