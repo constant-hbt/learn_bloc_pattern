@@ -1,7 +1,9 @@
 import 'package:bloc_pattern/src/pages/home/widgets/hello_user_widget.dart';
 import 'package:bloc_pattern/src/pages/home/widgets/home_widgets.dart';
+import 'package:bloc_pattern/src/pages/home/widgets/menu_view_widget.dart';
 import 'package:bloc_pattern/src/pages/home/widgets/search_view_widget.dart';
 import 'package:bloc_pattern/src/pages/home/widgets/slider_view_widget.dart';
+import 'package:bloc_pattern/src/pages/home/widgets/sliver_menu_items_widget.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,31 +20,48 @@ class _HomePageState extends State<HomePage> {
     "assets/icons/image_2.png",
   ];
 
+  final List<String> sliverMenuImages = [
+    "assets/icons/image_1.png",
+    "assets/icons/image_2.png",
+    "assets/icons/image_3.png",
+    'assets/icons/image_4.png',
+  ];
+
+  Widget _spacing({EdgeInsets space = const EdgeInsets.only(top: 16)}) {
+    return SliverPadding(padding: space);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HomeWidgets.buildAppBar(),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const HelloUserWidget(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 4),
+        child: CustomScrollView(
+          slivers: [
+            const SliverToBoxAdapter(
+              child: HelloUserWidget(
                 userName: 'Henrique',
               ),
-              const SizedBox(
-                height: 20,
-              ),
-              const SearchViewWidget(),
-              const SizedBox(
-                height: 20,
-              ),
-              SliderViewWidget(
+            ),
+            _spacing(),
+            const SliverToBoxAdapter(
+              child: SearchViewWidget(),
+            ),
+            _spacing(),
+            SliverToBoxAdapter(
+              child: SliderViewWidget(
                 pathImages: sliderViewImages,
               ),
-            ],
-          ),
+            ),
+            _spacing(),
+            const SliverToBoxAdapter(
+              child: MenuViewWidget(),
+            ),
+            SliverMenuItemsWidget(
+              images: sliverMenuImages,
+            ),
+          ],
         ),
       ),
     );
