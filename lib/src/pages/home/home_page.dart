@@ -12,27 +12,35 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final List<String> sliderViewImages = [
+    "assets/icons/art.png",
+    "assets/icons/image_1.png",
+    "assets/icons/image_2.png",
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: HomeWidgets.buildAppBar(),
-      body: const SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 0),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              HelloUserWidget(
+              const HelloUserWidget(
                 userName: 'Henrique',
               ),
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
-              SearchViewWidget(),
-              SizedBox(
+              const SearchViewWidget(),
+              const SizedBox(
                 height: 20,
               ),
-              SliderViewWidget(),
+              SliderViewWidget(
+                pathImages: sliderViewImages,
+              ),
             ],
           ),
         ),

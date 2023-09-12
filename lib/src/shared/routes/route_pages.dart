@@ -1,5 +1,6 @@
 import 'package:bloc_pattern/src/global.dart';
 import 'package:bloc_pattern/src/pages/application/bloc/application_bloc.dart';
+import 'package:bloc_pattern/src/pages/home/bloc/home_blocs.dart';
 import 'package:bloc_pattern/src/pages/welcome/blocs/welcome_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc_pattern/src/pages/pages.dart';
@@ -40,6 +41,13 @@ class AppRoutePages {
           const ApplicationPage(),
           bloc: [
             BlocProvider(create: (context) => ApplicationBloc()),
+          ],
+        ),
+        PageEntity(
+          AppRouteNames.HOME,
+          const HomePage(),
+          bloc: [
+            BlocProvider(create: (context) => HomeBlocs()),
           ],
         ),
       ];
