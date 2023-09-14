@@ -1,6 +1,6 @@
 import 'package:bloc_pattern/src/pages/profile/widgets/list_items_widget.dart';
 import 'package:bloc_pattern/src/pages/profile/widgets/profile_image_edit_widget.dart';
-import 'package:bloc_pattern/src/shared/themes/app_color_scheme.dart';
+import 'package:bloc_pattern/src/shared/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -22,14 +22,7 @@ class _ProfilePageState extends State<ProfilePage> {
             height: 12,
             child: Image.asset('assets/icons/menu.png'),
           ),
-          const Text(
-            'Profile',
-            style: TextStyle(
-              color: AppColorScheme.primaryText,
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
-          ),
+          const BaseTextWidget('Profile'),
           SizedBox(
             width: 24,
             height: 24,

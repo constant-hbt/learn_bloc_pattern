@@ -1,5 +1,5 @@
 import 'package:bloc_pattern/src/shared/themes/app_color_scheme.dart';
-import 'package:bloc_pattern/src/shared/widgets/build_functions.dart';
+import 'package:bloc_pattern/src/shared/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextFormField extends StatefulWidget {
@@ -49,7 +49,10 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           if (widget.labelText != null && widget.labelText!.isNotEmpty)
-            BuildFunctions.reusableText(widget.labelText!, marginBottom: 10),
+            OpaqueTextMarginWidget(
+              widget.labelText!,
+              margin: const EdgeInsets.only(bottom: 10),
+            ),
           TextFormField(
             key: _textFormFieldKey,
             controller: widget.controller,

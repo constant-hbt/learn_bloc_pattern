@@ -1,5 +1,6 @@
 import 'package:bloc_pattern/src/shared/routes/routes.dart';
 import 'package:bloc_pattern/src/shared/themes/app_color_scheme.dart';
+import 'package:bloc_pattern/src/shared/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 
 class ListItemsWidget extends StatelessWidget {
@@ -38,14 +39,7 @@ class ListItemsWidget extends StatelessWidget {
                 ),
                 child: Image.asset('assets/icons/$imagePath'),
               ),
-              Text(
-                description,
-                style: const TextStyle(
-                  color: AppColorScheme.primaryText,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
+              BaseTextWidget(description),
             ],
           ),
         ),

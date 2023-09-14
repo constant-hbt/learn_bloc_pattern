@@ -1,4 +1,5 @@
 import 'package:bloc_pattern/src/shared/themes/app_color_scheme.dart';
+import 'package:bloc_pattern/src/shared/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 
 class SliverMenuItemsWidget extends StatelessWidget {
@@ -42,30 +43,18 @@ class SliverMenuItemsWidget extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      BaseTextWidget(
                         'Best course for IT and Engineering',
-                        maxLines: 1,
-                        overflow: TextOverflow.clip,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          color: AppColorScheme.primaryElementText,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 11,
-                        ),
+                        color: AppColorScheme.primaryElementText,
+                        fontSize: 11,
+                        margin: EdgeInsets.only(bottom: 5),
                       ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
+                      BaseTextWidget(
                         'Flutter best course',
-                        maxLines: 1,
-                        overflow: TextOverflow.fade,
-                        textAlign: TextAlign.start,
-                        style: TextStyle(
-                          color: AppColorScheme.primaryFourElementText,
-                          fontWeight: FontWeight.normal,
-                          fontSize: 8,
-                        ),
+                        color: AppColorScheme.primaryFourElementText,
+                        textOverflow: TextOverflow.fade,
+                        fontWeight: FontWeight.normal,
+                        fontSize: 8,
                       ),
                     ],
                   ),

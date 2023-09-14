@@ -71,8 +71,8 @@ class _RegisterPageState extends State<RegisterPage> with ValidationMixins {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Center(
-                  child: BuildFunctions.reusableText(
+              const Center(
+                  child: OpaqueTextMarginWidget(
                       'Enter your details below & free sign up')),
               Container(
                 margin: const EdgeInsets.only(top: 32),
@@ -123,7 +123,7 @@ class _RegisterPageState extends State<RegisterPage> with ValidationMixins {
                         onChange: _setAutoValidateMode,
                         validator: _confirmPasswordValidation,
                       ),
-                      BuildFunctions.reusableText(
+                      const OpaqueTextMarginWidget(
                           'By creating an account you have to agree with our team & condication.'),
                       const SizedBox(
                         height: 64,

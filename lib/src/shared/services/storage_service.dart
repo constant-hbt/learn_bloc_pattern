@@ -26,6 +26,10 @@ class StorageService {
     return _prefs.getString(AppConstants.STORAGE_USER_TOKEN_KEY) != null;
   }
 
+  Future<bool> logout(String key) async {
+    return await _prefs.remove(key);
+  }
+
   // const StorageService._();
 
   // static final StorageService instance = StorageService._();

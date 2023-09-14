@@ -1,26 +1,9 @@
 import 'package:bloc_pattern/src/shared/themes/app_color_scheme.dart';
+import 'package:bloc_pattern/src/shared/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 
 class MenuViewWidget extends StatelessWidget {
   const MenuViewWidget({super.key});
-
-  Widget _reusableMenuText(
-    String text, {
-    Color color = AppColorScheme.primaryText,
-    double fontSize = 16,
-    FontWeight fontWeight = FontWeight.bold,
-  }) {
-    return Text(
-      text,
-      maxLines: 1,
-      overflow: TextOverflow.clip,
-      style: TextStyle(
-        color: color,
-        fontWeight: fontWeight,
-        fontSize: fontSize,
-      ),
-    );
-  }
 
   Widget _reusableMenuTab(String title, {bool isSelected = false}) {
     final Color backgroundColor = isSelected
@@ -42,7 +25,7 @@ class MenuViewWidget extends StatelessWidget {
             ? Border.all(color: AppColorScheme.primaryElement)
             : null,
       ),
-      child: _reusableMenuText(
+      child: BaseTextWidget(
         title,
         color: titleColor,
         fontWeight: fontWeight,
@@ -58,12 +41,12 @@ class MenuViewWidget extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Expanded(
-              child: _reusableMenuText('Choose your course'),
+            const Expanded(
+              child: BaseTextWidget('Choose your course'),
             ),
             GestureDetector(
               onTap: () {},
-              child: _reusableMenuText(
+              child: const BaseTextWidget(
                 'See all',
                 color: AppColorScheme.primaryThreeElementText,
                 fontSize: 12,

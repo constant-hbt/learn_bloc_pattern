@@ -1,5 +1,4 @@
 import 'package:bloc_pattern/src/pages/home/widgets/hello_user_widget.dart';
-import 'package:bloc_pattern/src/pages/home/widgets/home_widgets.dart';
 import 'package:bloc_pattern/src/pages/home/widgets/menu_view_widget.dart';
 import 'package:bloc_pattern/src/pages/home/widgets/search_view_widget.dart';
 import 'package:bloc_pattern/src/pages/home/widgets/slider_view_widget.dart';
@@ -31,10 +30,45 @@ class _HomePageState extends State<HomePage> {
     return SliverPadding(padding: space);
   }
 
+  AppBar _buildAppBar() {
+    return AppBar(
+      title: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 6),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            InkWell(
+              onTap: () {},
+              child: SizedBox(
+                height: 12,
+                width: 15,
+                child: Image.asset(
+                  'assets/icons/menu.png',
+                ),
+              ),
+            ),
+            GestureDetector(
+              child: Container(
+                width: 40,
+                height: 40,
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/icons/person.png'),
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: HomeWidgets.buildAppBar(),
+      appBar: _buildAppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 0),
         child: CustomScrollView(

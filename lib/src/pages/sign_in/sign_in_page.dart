@@ -1,5 +1,4 @@
 import 'package:bloc_pattern/src/pages/sign_in/sign_in_controller.dart';
-import 'package:bloc_pattern/src/pages/sign_in/widgets/custom_widgets.dart';
 import 'package:bloc_pattern/src/pages/sign_in/widgets/third_party_login_widget.dart';
 import 'package:bloc_pattern/src/shared/utils/validation_mixins.dart';
 import 'package:bloc_pattern/src/shared/widgets/shared_widgets.dart';
@@ -22,9 +21,11 @@ class _SignInPageState extends State<SignInPage> with ValidationMixins {
   AutovalidateMode _autoValidate = AutovalidateMode.disabled;
 
   void _setAutoValidateMode() {
-    setState(() {
-      _autoValidate = AutovalidateMode.always;
-    });
+    if (_autoValidate == AutovalidateMode.disabled) {
+      setState(() {
+        _autoValidate = AutovalidateMode.always;
+      });
+    }
   }
 
   Future<void> _signIn() async {
@@ -48,11 +49,10 @@ class _SignInPageState extends State<SignInPage> with ValidationMixins {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const ThirdPartyLoginWidget(),
-            Center(
-                child: BuildFunctions.reusableText(
-                    'Or use your account to login')),
+            const Center(
+                child: OpaqueTextMarginWidget('Or use your account to login')),
             Container(
-              margin: const EdgeInsets.only(top: 60),
+              margin: const EdgeInsets.only(top: 48),
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Form(
                 key: _formKey,
@@ -80,13 +80,22 @@ class _SignInPageState extends State<SignInPage> with ValidationMixins {
                       validator: (password) =>
                           passwordValidation(password: password),
                     ),
-                    CustomWidgets.forgotPassword(context, () {}),
+                    GestureDetector(
+                      onTap: () => {},
+                      child: BaseTextWidget(
+                        'Forgot Password',
+                        fontWeight: FontWeight.normal,
+                        fontSize: 12,
+                        textDecoration: TextDecoration.underline,
+                        decorationColor: Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
                     const SizedBox(
-                      height: 80,
+                      height: 92,
                     ),
                     CustomElevatedButtonWidget(text: 'Log In', func: _signIn),
                     const SizedBox(
-                      height: 32,
+                      height: 24,
                     ),
                     CustomOutlineButtonWidget(
                         text: 'Sign Up',

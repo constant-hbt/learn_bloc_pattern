@@ -1,12 +1,13 @@
 import 'package:bloc_pattern/src/shared/themes/app_color_scheme.dart';
+import 'package:bloc_pattern/src/shared/widgets/shared_widgets.dart';
 import 'package:flutter/material.dart';
 
 class BuildFunctions {
   static AppBar buildAppBar(String title) {
     return AppBar(
-      title: Text(
+      title: BaseTextWidget(
         title,
-        style: const TextStyle(color: AppColorScheme.primaryText),
+        fontWeight: FontWeight.normal,
       ),
       bottom: PreferredSize(
         preferredSize: const Size.fromHeight(1),
@@ -17,19 +18,4 @@ class BuildFunctions {
       ),
     );
   }
-
-  static Widget reusableText(String text, {double marginBottom = 5}) =>
-      Container(
-        margin: EdgeInsets.only(
-          bottom: marginBottom,
-        ),
-        child: Text(
-          text,
-          style: TextStyle(
-            color: Colors.grey.withOpacity(0.8),
-            fontWeight: FontWeight.normal,
-            fontSize: 14,
-          ),
-        ),
-      );
 }
