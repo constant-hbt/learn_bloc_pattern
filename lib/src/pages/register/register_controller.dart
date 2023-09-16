@@ -1,4 +1,3 @@
-import 'package:bloc_pattern/src/shared/values/app_constants.dart';
 import 'package:bloc_pattern/src/shared/widgets/notifications/flutter_toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -17,8 +16,7 @@ class RegisterController {
       if (credential.user != null) {
         await credential.user?.sendEmailVerification();
         await credential.user?.updateDisplayName(userName);
-        const String photoUrl =
-            '${AppConstants.SERVER_API_URL}uploads/default-avatar.png';
+        const String photoUrl = 'uploads/default-avatar.png';
 
         await credential.user?.updatePhotoURL(photoUrl);
         FlutterToast.toastInfo(

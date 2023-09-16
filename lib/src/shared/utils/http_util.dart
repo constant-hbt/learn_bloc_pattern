@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:bloc_pattern/src/shared/values/app_constants.dart';
 import 'package:dio/dio.dart';
 

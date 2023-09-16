@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:bloc_pattern/src/shared/models/entities.dart';
 import 'package:bloc_pattern/src/shared/values/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,8 +28,19 @@ class StorageService {
     return _prefs.getString(AppConstants.STORAGE_USER_TOKEN_KEY) != null;
   }
 
-  Future<bool> logout(String key) async {
+  Future<bool> remove(String key) async {
     return await _prefs.remove(key);
+  }
+
+  UserItem? getUserProfile() {
+    String profileOffline =
+        _prefs.getString(AppConstants.STORAGE_USER_PROFILE_KEY) ?? '';
+
+    if (profileOffline.isNotEmpty) {
+      return UserItem.fromJson(jsonDecode(profileOffline));
+    }
+
+    return null;
   }
 
   // const StorageService._();
